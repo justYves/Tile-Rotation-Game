@@ -52,6 +52,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f66d1447d7306b4b8ec96dbf38bfe2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0.3
+  reachDist: 1
+  currentPoint: 0
+  path: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  destination: {fileID: 0}
+  currentTile: {fileID: 0}
+  hasReachedDestination: 0
+  map: {fileID: 0}
 --- !u!212 &212445740816551300
 SpriteRenderer:
   m_ObjectHideFlags: 1
