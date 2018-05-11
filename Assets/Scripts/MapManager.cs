@@ -5,38 +5,49 @@ using UnityEngine;
 public class MapManager : MonoBehaviour {
 	// public GameObject[] prefabs = new GameObject[1];
 	public List<GameObject> prefabList = new List<GameObject>();
+
+	public GameObject character;
 	public int width;
 	public int height;
 
-	// public Map map;
-	// Use this for initialization
-	// void Start () {
-		// Vector2 mapSize = getMapSize();
-
-		// map.width = (int) mapSize.x;
-		// map.height = (int) mapSize.y;
-
-		// map.tiles = new tile[map.width, map.height];
-
-		// GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
-		// foreach (var tile in tiles) {
-		// 	map.tiles[(int) tile.transform.position.x, (int) tile.transform.position.y] = tile.GetComponent<tile>();
-		// }
-		// foreach (var tile in map.tiles) {
-		// 	Debug.Log(tile.gameObject.name);
-		// }
-	// }
-
 	void Start(){
 		// int prefabIndex = UnityEngine.Random.Range(0,prefabList.Count-1);
+		createMap();
+		shuffleMap();
+		spawnCharacter();
+    }
+
+	void createMap() {
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				Vector2 position = new Vector2(x,y);
-				GameObject tile = Instantiate(prefabList[Random.Range(0, prefabList.Count)]);
+				int prefabIndex;
+				if (Random.Range(0, 100) > 90) {
+					prefabIndex = prefabList.Count - 1;
+				} else {
+					prefabIndex = Random.Range(0, prefabList.Count-1);
+				}
+				GameObject tile = Instantiate(prefabList[prefabIndex]);
 				tile.transform.position = position;
 			}
 		}
-    }
+	}
+
+	void shuffleMap() {
+		foreach (var currentTile in GameObject.FindGameObjectsWithTag("Tile")) {
+			int rand = Random.Range(0,4);
+
+			for (int i = 0; i < rand; i++) {
+				currentTile.GetComponent<Tile>().rotateTile();
+			}
+		}
+	}
+
+	void spawnCharacter() {
+		Vector3 position = new Vector3(0, 0, -1);
+		GameObject tile = Instantiate(character);
+		tile.transform.position = position;
+	}
 
 	void Update () {
 		

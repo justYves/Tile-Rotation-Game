@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class tile : MonoBehaviour {
+public class Tile : MonoBehaviour {
 	float rotation;
 	float rotationIncrement = 90;
 	public int[] roadValues;
@@ -24,12 +24,12 @@ public class tile : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		rotation += rotationIncrement;
-		rotation = rotation == 360 ? 0 : rotation;
+		rotateTile();
 	}
 
 	public void rotateTile() {
-		transform.rotation = Quaternion.Euler(0, 0, rotation);
+		rotation += rotationIncrement;
+		rotation = rotation == 360 ? 0 : rotation;
 		updateValues();
 	}
 
